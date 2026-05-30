@@ -7,8 +7,8 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/harris-nasir/system-17/blob/main/system-17.md">Spec</a> ·
-  <a href="#install">Install</a> ·
+  <a href="https://github.com/harris-nasir/system-17/blob/main/system-17-spec.md">Spec</a> ·
+  <a href="#implementation">Implementation</a> ·
   <a href="#palette">Palette</a> ·
   <a href="#porting">Porting</a>
 </p>
@@ -25,7 +25,7 @@
 
 system-17 is built on three rules:
 
-- **Achromatic backgrounds.** Every surface is a pure gray — no blue tint, no warm tint. The editor disappears; the code doesn't.
+- **Achromatic base.** Every surface uses a pure, neutral gray base. We avoid transparent or alpha-based overlays in favor of pre-blended solid colors to ensure consistent performance and appearance across all terminals and editors.
 - **One accent, used with discipline.** Orange (`#d97c2b`) is the single UI accent — cursor, focus rings, active borders, search highlights. It never bleeds into syntax.
 - **Syntax as a fire gradient.** Language tokens follow a warm ramp — red → orange → amber → yellow — with teal and green as cool counterweights for types and strings. Hotter = closer to the metal.
 
@@ -61,32 +61,19 @@ system-17 is built on three rules:
 
 > Full palette with token mappings, ANSI colors, diagnostics, and UI details → **[system-17.md](system-17.md)**
 
-## Install
+## Implementation
 
-### Zed
-
-```bash
-# Copy the theme file into Zed's theme directory
-mkdir -p ~/.config/zed/themes
-cp zed-editor/system-17.json ~/.config/zed/themes/
-```
-
-Open Zed → `Cmd/Ctrl + K`, `Cmd/Ctrl + T` → select **system-17**.
-
-### Other editors
-
-system-17 is spec-first — the [theme spec](system-17.md) contains everything needed to port it to any editor: surface mappings, syntax token tables, ANSI palette, diagnostic colors, pre-blended solids, and porting guidelines.
+system-17 is spec-first. Please refer to the [theme spec](system-17-spec.md) for detailed implementation instructions, including specific surface mappings, syntax token tables, and our pre-blended solid color guidelines for every editor.
 
 ## Porting
 
 When bringing system-17 to a new app:
 
-1. **Map surfaces by depth** — `base-00` (deepest) through `base-07` (shallowest)
-2. **One accent** — `#d97c2b` for every interactive element
-3. **Match syntax tokens** — the spec uses Tree-sitter/LSP standard names
-4. **Don't invent new accents** — if you need a secondary, use `syn-teal` (`#64d1a9`)
-
-Full porting guidelines with pre-blended solids and alpha compositing values → **[system-17.md](system-17.md#porting-guidelines)**
+1. **Map surfaces by depth** : `base-00` (deepest) through `base-07` (shallowest).
+2. **One accent** : `#d97c2b` for every interactive element.
+3. **Match syntax tokens** : the spec uses Tree-sitter/LSP standard names.
+4. **Don't invent new accents** : use `syn-teal` (`#64d1a9`) for secondary UI elements.
+5. **Avoid Alpha/Transparency** : Use the pre-blended solid hex codes provided in the [spec](system-17-spec.md) to guarantee color accuracy across all platforms.
 
 ## License
 
