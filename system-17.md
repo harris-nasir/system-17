@@ -27,7 +27,7 @@ These are achromatic. No tint of any kind.
 | `base-02` | `#1c1c1c` | Main UI chrome, toolbar, active tab background, surface                           |
 | `base-03` | `#232323` | Elevated surfaces (dropdowns, popovers)                                           |
 | `base-04` | `#282828` | Borders, dividers                                                                 |
-| `base-05` | `#2c2c2c` | Element backgrounds, highlighted lines                                            |
+| `base-05` | `#2c2c2c` | Element backgrounds, highlighted lines, active menu items                         |
 | `base-06` | `#363636` | Hover states, selected elements                                                   |
 | `base-07` | `#404040` | Active/pressed states                                                             |
 
@@ -48,12 +48,10 @@ These are achromatic. No tint of any kind.
 The single UI accent. Used for focus, cursor, selection glow, search highlights, active borders.
 **Never use for syntax tokens.** Orange in the syntax space belongs to keywords only.
 
-| Name           | Hex           | Usage                                                             |
-|----------------|---------------|-------------------------------------------------------------------|
-| `accent`       | `#d97c2b`     | Primary accent — cursor, focused borders, active badges, player 1 |
-| `accent-link`  | `#e8891a`     | Hovered links                                                     |
-| `accent-glow`  | `#d97c2b33`   | Selection highlight, search match background (20% opacity)        |
-| `accent-match` | `#d97c2b66`   | Active search match (40% opacity)                                 |
+| Name           | Hex       | Usage                                                             |
+|----------------|-----------|-------------------------------------------------------------------|
+| `accent`       | `#d97c2b` | Primary accent — cursor, focused borders, active badges, player 1 |
+| `accent-hover` | `#e8891a` | Hovered links and accent elements                                 |
 
 ---
 
@@ -69,7 +67,7 @@ These belong to things the *language itself* defines. They form a fire gradient 
 |---------------|-----------|----------------------------------------------------------------------------------------------------------------------------------|
 | `syn-red`     | `#f08090` | `error`, `deleted`, `diff.minus` — diagnostics and deletions                                                                     |
 | `syn-preproc` | `#e8623a` | `preproc` — preprocessor directives (`#ifdef`, `#pragma`)                                                                        |
-| `syn-orange`  | `#ff9668` | `keyword`, `keyword.control`, `boolean`, `number`, `type.builtin`, `label`, `function.builtin` — everything the language *owns*  |
+| `syn-orange`  | `#ff9668` | `keyword`, `keyword.control`, `boolean`, `number`, `type.builtin`, `label`, `function.builtin` — everything the language *owns* |
 | `syn-amber`   | `#c8993a` | `warning`, `modified` — diagnostic warnings, modified file indicators                                                            |
 | `syn-yellow`  | `#e8cc8c` | `function`, `function.method`, `function.special.definition`, `constructor` — things *you* define and call                       |
 
@@ -98,22 +96,22 @@ These are the workhorse tokens. Low chroma, high readability. All values are tru
 
 ### Embedded and Predictive
 
-| Name             | Hex       | Tokens                                                                                        |
-|------------------|-----------|-----------------------------------------------------------------------------------------------|
-| `syn-embedded`   | `#dce0e5` | `embedded` — embedded language content (e.g. JS inside HTML)                                  |
-| `syn-predictive` | `#5a6a87` | `predictive` — ghost text from autocomplete/copilot suggestions. Italic, stays out of the way |
+| Name             | Hex       | Tokens                                                                          |
+|------------------|-----------|---------------------------------------------------------------------------------|
+| `syn-embedded`   | `#dce0e5` | `embedded` — embedded language content (e.g. JS inside HTML)                    |
+| `syn-predictive` | `#5a6a87` | `predictive` — ghost text from autocomplete/copilot suggestions. Low prominence |
 
 ### Accent in Syntax — Markup and UI
 
 These appear in markup, CSS, and prose contexts rather than general code.
 
-| Name              | Hex       | Tokens                                                                          |
-|-------------------|-----------|---------------------------------------------------------------------------------|
-| `syn-blue`        | `#74ade8` | `tag`, `emphasis`, `selector.pseudo`, `link_text`, `link_uri`, `variant`        |
-| `syn-strong`      | `#bf956a` | `emphasis.strong` — bold markup. Weight 700                                     |
-| `syn-rose`        | `#d07277` | `variable.special`, `title`, `punctuation.list_marker`, `punctuation.markup`    |
-| `syn-rose-dim`    | `#b1574b` | `punctuation.special`                                                           |
-| `syn-gold`        | `#dfc184` | `selector`                                                                      |
+| Name           | Hex       | Tokens                                                                          |
+|----------------|-----------|---------------------------------------------------------------------------------|
+| `syn-blue`     | `#74ade8` | `tag`, `emphasis`, `selector.pseudo`, `link_text`, `link_uri`, `variant`        |
+| `syn-strong`   | `#bf956a` | `emphasis.strong` — bold markup. Weight 700                                     |
+| `syn-rose`     | `#d07277` | `variable.special`, `title`, `punctuation.list_marker`, `punctuation.markup`    |
+| `syn-rose-dim` | `#b1574b` | `punctuation.special`                                                           |
+| `syn-gold`     | `#dfc184` | `selector`                                                                      |
 
 ### Comments — Three Tiers
 
@@ -122,7 +120,7 @@ Comments use a tiered sage-green system. The dimmer the tone, the less important
 | Name              | Hex       | Usage                                                            |
 |-------------------|-----------|------------------------------------------------------------------|
 | `comment-regular` | `#4e7a62` | `// regular comments` — low visual weight, stays out of the way  |
-| `comment-doc`     | `#72b396` | `/// doc comments` — elevated, italic, clearly distinct          |
+| `comment-doc`     | `#72b396` | `/// doc comments` — elevated, clearly distinct                  |
 
 The third tier is **task-tag highlighting** — TODO, FIXME, BUG, and NOTE keywords inside comments. These use existing syntax colors applied as an editor-level highlight layer on top of `comment-regular`:
 
@@ -146,89 +144,83 @@ The third tier is **task-tag highlighting** — TODO, FIXME, BUG, and NOTE keywo
 
 ## Diagnostic Colors
 
-All diagnostic backgrounds use the same base color at `1a` hex opacity (~10%) so they don't overpower the editor. Borders use a darker solid tint.
+All diagnostic backgrounds are pre-blended against `base-00` (`#141414`) to ensure solid, bug-free rendering across all terminals and platforms. 
 
-| Severity | Foreground | Background    | Border        |
-|----------|------------|---------------|---------------|
-| Error    | `#f08090`  | `#f080901a`   | `#3a1820`     |
-| Warning  | `#c8993a`  | `#c8993a44`   | `#c8993a66`   |
-| Info     | `#74ade8`  | `#74ade81a`   | `#1a2e3a`     |
-| Hint     | `#7a6a55`  | `#1e1b16`     | `#2e2518`     |
+| Severity | Foreground | Solid Background |
+|----------|------------|------------------|
+| Error    | `#f08090`  | `#2a1f20`        |
+| Warning  | `#c8993a`  | `#44371e`        |
+| Info     | `#74ade8`  | `#1e2329`        |
+| Hint     | `#7a6a55`  | `#1e1b16`        |
 
 ---
 
 ## Version Control Colors
 
-| State           | Color         | Word-level alpha | Notes         |
-|-----------------|---------------|------------------|---------------|
-| Added           | `#48b06f`     | `59` (35%)       | Green family  |
-| Modified        | `#d97c2b`     | —                | Accent orange |
-| Deleted         | `#f08090`     | `99` (60%)       | Red family    |
-| Conflict ours   | `#48b06f1a`   | —                | Green tint    |
-| Conflict theirs | `#74ade81a`   | —                | Blue tint     |
+| State           | Solid Color | Notes                             |
+|-----------------|-------------|-----------------------------------|
+| Added           | `#48b06f`   | Green family                      |
+| Modified        | `#d97c2b`   | Accent orange                     |
+| Deleted         | `#f08090`   | Red family                        |
+| Conflict ours   | `#19241d`   | Green tint blended over `base-00` |
+| Conflict theirs | `#1e2329`   | Blue tint blended over `base-00`  |
 
 ---
 
 ## UI Details
 
-Editor-level tokens for interactive highlights, selection, scrollbar, indent guides, and multiplayer cursors. These are needed when porting to any editor that exposes fine-grained UI color slots.
+Editor-level tokens for interactive highlights, selection, scrollbar, indent guides, and multiplayer cursors. **All values are solid hex codes.**
 
 ### Editor
 
-| Element                        | Color           | Notes                                       |
-|--------------------------------|-----------------|---------------------------------------------|
-| Selection background           | `#d97c2b3d`     | Accent at ~24% opacity                      |
-| Active line background         | `#1e1e1ebf`     | Near-black at ~75% opacity                  |
-| Highlighted line background    | `#2c2c2c`       | `base-05`                                   |
-| Line number                    | `#444444`       | `text-invisible`                            |
-| Active line number             | `#8a8a8a`       | `text-muted`                                |
-| Hovered line number            | `#6a6a6a`       | `text-subtle`                               |
-| Invisible characters           | `#333333`       |                                             |
-| Indent guide                   | `#2a2a2a`       |                                             |
-| Indent guide (active)          | `#424242`       |                                             |
-| Wrap guide                     | `#2828280d`     | `base-04` at ~5% opacity                    |
-| Wrap guide (active)            | `#3636361a`     | `base-06` at ~10% opacity                   |
+| Element                        | Hex       | Notes                                             |
+|--------------------------------|-----------|---------------------------------------------------|
+| Selection background           | `#432d1a` | Pre-blended accent tint                           |
+| Selection background (primary) | `#543a21` | Pre-blended stronger accent tint                  |
+| Active line background         | `#212121` | Solid equivalent to avoid transparency overlap    |
+| Highlighted line background    | `#2c2c2c` | `base-05`                                         |
+| Line number                    | `#444444` | `text-invisible`                                  |
+| Active line number             | `#8a8a8a` | `text-muted`                                      |
+| Hovered line number            | `#6a6a6a` | `text-subtle`                                     |
+| Invisible characters           | `#333333` |                                                   |
+| Indent guide                   | `#2a2a2a` |                                                   |
+| Indent guide (active)          | `#424242` |                                                   |
+| Active menu item / popover     | `#2c2c2c` | `base-05` — keeps popovers subtle                 |
 
-### Document Highlights
+### Document Highlights & Search
 
-| Element                 | Color         | Notes                        |
-|-------------------------|---------------|------------------------------|
-| Read highlight          | `#d97c2b1a`   | Accent at ~10% — subtle glow |
-| Write highlight         | `#d97c2b33`   | Accent at 20% — stronger     |
-| Bracket match           | `#363636`     | `base-06` — solid background |
-
-### Search
-
-| Element              | Color         | Notes              |
-|----------------------|---------------|--------------------|
-| Match background     | `#d97c2b33`   | Accent at 20%      |
-| Active match         | `#d97c2b66`   | Accent at 40%      |
+| Element              | Hex       | Notes                          |
+|----------------------|-----------|--------------------------------|
+| Document read        | `#281f16` | Solid subtle glow              |
+| Document write       | `#3b2919` | Solid stronger glow            |
+| Bracket match        | `#363636` | `base-06` — solid background   |
+| Search match bg      | `#3b2919` | Pre-blended accent tint        |
+| Search active match  | `#633e1d` | Pre-blended strong accent tint |
 
 ### Scrollbar
 
-| Element              | Color         | Notes                          |
-|----------------------|---------------|--------------------------------|
-| Thumb background     | `#ffffff18`   | White at ~9% — barely visible  |
-| Thumb hover          | `#ffffff28`   | White at ~16%                  |
-| Thumb active         | `#ffffff38`   | White at ~22%                  |
-| Thumb border         | `#ffffff10`   | White at ~6%                   |
-| Track background     | `transparent` |                                |
-| Track border         | `#1c1c1c`     | `base-02`                      |
+| Element              | Hex           | Notes     |
+|----------------------|---------------|-----------|
+| Thumb background     | `#2c2c2c`     | `base-05` |
+| Thumb hover          | `#363636`     | `base-06` |
+| Thumb active         | `#404040`     | `base-07` |
+| Track background     | `transparent` |           |
+| Track border         | `#1c1c1c`     | `base-02` |
 
 ### Player Cursors (Multiplayer)
 
 Eight player slots. Player 1 uses the accent color; the rest are drawn from the syntax palette to avoid introducing new hues.
 
-| Player | Cursor/Background  | Selection     | Source color   |
-|--------|--------------------|--------------:|----------------|
-| 1      | `#d97c2b`          | `#d97c2b3d`   | `accent`       |
-| 2      | `#f08090`          | `#f080903d`   | `syn-red`      |
-| 3      | `#64d1a9`          | `#64d1a93d`   | `syn-teal`     |
-| 4      | `#74ade8`          | `#74ade83d`   | `syn-blue`     |
-| 5      | `#c586c0`          | `#c586c03d`   | ANSI magenta   |
-| 6      | `#e8cc8c`          | `#e8cc8c3d`   | `syn-yellow`   |
-| 7      | `#48b06f`          | `#48b06f3d`   | `syn-green-dim`|
-| 8      | `#d07277`          | `#d072773d`   | `syn-rose`     |
+| Player | Cursor Hex | Solid Selection Hex | Source color    |
+|--------|------------|---------------------|-----------------|
+| 1      | `#d97c2b`  | `#432d1a`           | `accent`        |
+| 2      | `#f08090`  | `#3b2126`           | `syn-red`       |
+| 3      | `#64d1a9`  | `#213129`           | `syn-teal`      |
+| 4      | `#74ade8`  | `#242f3a`           | `syn-blue`      |
+| 5      | `#c586c0`  | `#322532`           | ANSI magenta    |
+| 6      | `#e8cc8c`  | `#3c3525`           | `syn-yellow`    |
+| 7      | `#48b06f`  | `#1e2f23`           | `syn-green-dim` |
+| 8      | `#d07277`  | `#352023`           | `syn-rose`      |
 
 ---
 
@@ -249,79 +241,9 @@ Eight player slots. Player 1 uses the accent color; the rest are drawn from the 
 
 ## Porting Guidelines
 
-When porting system-17 to a new app:
-
-1. **Map surfaces by depth.** Find the app's background layer hierarchy and assign `base-00` through `base-07` from deepest to shallowest. If the app only has one background level, use `base-02`.
-2. **One accent.** Use `#d97c2b` for every interactive highlight — focused input borders, selected items, active tabs, cursor, progress bars. If the app has a "primary color" setting, that's the one.
-3. **Syntax maps.** The token names above (`keyword`, `string`, `type`, etc.) are Tree-sitter/LSP standard names. Most editors expose these. Match them to the colors in the Syntax section above.
-4. **Diagnostic colors are semantic.** Red = broken, amber = suspicious, blue = informational. Don't swap them.
-5. **Don't invent new accent colors.** If you need a second accent for a specific app context, pull from `syn-teal` (`#64d1a9`) as a secondary. It's the coolest color in the palette and contrasts cleanly with orange.
-6. **Alpha values.** When an app supports RGBA, use the alpha variants for backgrounds (selection, search match, diagnostic backgrounds). When it only supports hex, use the pre-blended solid equivalents listed below.
-7. **UI details.** Consult the UI Details section for editor-specific tokens (scrollbar, indent guides, selections, player cursors). These vary by editor but the values above cover the common slots.
-
-### Pre-blended Solids (for apps without alpha support)
-
-These are the alpha colors pre-composited over `base-00` (`#141414`):
-
-| Alpha color   | Solid equivalent | Usage                             |
-|---------------|------------------|-----------------------------------|
-| `#d97c2b1a`   | `#281f16`        | Document highlight (read)         |
-| `#d97c2b33`   | `#3b2919`        | Search match, accent glow         |
-| `#d97c2b3d`   | `#432d1a`        | Editor selection                  |
-| `#d97c2b66`   | `#633e1d`        | Active search match               |
-| `#f080901a`   | `#2a1f21`        | Error background                  |
-| `#c8993a44`   | `#44371e`        | Warning background                |
-| `#48b06f1a`   | `#19241d`        | Added / conflict ours             |
-| `#74ade81a`   | `#1e242a`        | Info background / conflict theirs |
-| `#1e1e1ebf`   | `#1b1b1b`        | Active line                       |
-
----
-
-## Quick Reference Card
-
-```
-SURFACES                        SYNTAX — WARM
-#141414  base-00  deepest       #f08090  syn-red       error, deleted
-#181818  base-01  panel         #e8623a  syn-preproc   preprocessor
-#1c1c1c  base-02  chrome        #ff9668  syn-orange    keyword, number, builtin
-#232323  base-03  elevated      #c8993a  syn-amber     warning, modified
-#282828  base-04  border        #e8cc8c  syn-yellow    function, constructor
-#2c2c2c  base-05  element bg
-#363636  base-06  hover         SYNTAX — COOL
-#404040  base-07  active        #64d1a9  syn-teal      type, enum, namespace
-                                #63d68a  syn-green     string
-TEXT                            #48b06f  syn-green-dim escape, special, diff+
-#f2f2f2  text-primary           #80edc5  syn-mint      regex
-#c0c0c0  text-icon
-#8a8a8a  text-muted             NEUTRAL
-#6a6a6a  text-subtle            #cbcccd  syn-gray-hi   variable, constant, operator
-#555555  text-faint             #9a9a9a  syn-gray-mid  bracket
-#4a4a4a  text-ghost             #7a7a7a  syn-gray-lo   punctuation, delimiter
-#444444  text-invisible
-                                MARKUP
-ACCENT                          #74ade8  syn-blue      tag, emphasis, link, variant
-#d97c2b  accent                 #bf956a  syn-strong    emphasis.strong
-#e8891a  accent-link            #d07277  syn-rose      variable.special, title
-#d97c2b33  accent-glow (20%)    #b1574b  syn-rose-dim  punctuation.special
-#d97c2b66  accent-match (40%)   #dfc184  syn-gold      selector
-
-COMMENTS                        EMBEDDED / PREDICTIVE
-#4e7a62  comment-regular        #dce0e5  syn-embedded
-#72b396  comment-doc            #5a6a87  syn-predictive
-
-INLAY HINTS                     DIAGNOSTICS (foreground)
-#7a6a55  hint                   #f08090  error
-#1e1b16  hint-bg                #c8993a  warning
-                                #74ade8  info
-TASK TAGS (in comments)         #7a6a55  hint
-#e8cc8c  TODO  (syn-yellow)
-#ff9668  FIXME (syn-orange)     VERSION CONTROL
-#f08090  BUG   (syn-red)        #48b06f  added
-#64d1a9  NOTE  (syn-teal)       #d97c2b  modified
-                                #f08090  deleted
-ANSI (normal)
-#1c1c1c  black    #74ade8  blue
-#f08090  red      #c586c0  magenta
-#48b06f  green    #64d1a9  cyan
-#e8cc8c  yellow   #c0c0c0  white
-```
+1. **Map surfaces by depth.** Find the app's background layer hierarchy and assign `base-00` through `base-07` from deepest to shallowest.
+2. **One accent.** Use `#d97c2b` for every interactive highlight.
+3. **Syntax maps.** Match token names to the colors in the Syntax section.
+4. **Diagnostic colors are semantic.** Red = broken, amber = suspicious, blue = informational.
+5. **Strictly 6-digit Hexes.** Do NOT use 8-digit RGBA hex codes. 
+6. **No Italics.** Differentiate tokens purely through color and syntax weight.
