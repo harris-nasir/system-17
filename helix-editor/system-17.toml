@@ -1,0 +1,208 @@
+# ==============================================================================
+# system-17 — Helix Theme Configuration
+# Description: Dark, monochrome-base theme with a warm orange accent.
+# ==============================================================================
+
+# ==============================================================================
+# SYNTAX HIGHLIGHTING
+# ==============================================================================
+
+# Core Neutrals
+"attribute"   = { fg = "syn-gray-hi" }
+"type"        = { fg = "syn-teal" }
+"type.builtin" = { fg = "syn-orange" }
+"constructor" = { fg = "syn-yellow" }
+"constant"    = { fg = "syn-gray-hi", modifiers = ["bold"] }
+"variable"    = { fg = "syn-gray-hi" }
+"variable.builtin" = { fg = "syn-orange" }
+"property"    = { fg = "syn-gray-hi" }
+"operator"    = { fg = "syn-gray-hi" }
+
+# Language Tokens
+"keyword"           = { fg = "syn-orange" }
+"keyword.control"   = { fg = "syn-orange" }
+"keyword.directive" = { fg = "syn-preproc" }
+"label"             = { fg = "syn-orange" }
+
+# User-Level Functions
+"function"                  = { fg = "syn-yellow" }
+"function.builtin"          = { fg = "syn-orange" }
+"function.method"           = { fg = "syn-yellow" }
+"function.special.definition" = { fg = "syn-yellow" }
+
+# Data and Structural Strings
+"string"                 = { fg = "syn-green" }
+"string.escape"          = { fg = "syn-green-dim" }
+"string.special"         = { fg = "syn-green-dim" }
+"string.special.symbol"  = { fg = "syn-green-dim" }
+"string.regex"           = { fg = "syn-mint" }
+"namespace"              = { fg = "syn-teal", modifiers = ["bold"] }
+
+# Punctuation Hierarchy
+"punctuation"           = { fg = "syn-gray-lo" }
+"punctuation.delimiter" = { fg = "syn-gray-lo" }
+"punctuation.bracket"   = { fg = "syn-gray-mid" }
+"punctuation.special"   = { fg = "syn-rose-dim" }
+
+# Comments Architecture
+"comment"                     = { fg = "comment-regular" }
+"comment.line"                = { fg = "comment-regular" }
+"comment.block"               = { fg = "comment-regular" }
+"comment.line.documentation"  = { fg = "comment-doc" }
+"comment.block.documentation" = { fg = "comment-doc" }
+
+# Markup, Prose, and Structural Embeds
+"markup.heading"       = { fg = "syn-rose" }
+"markup.bold"          = { fg = "syn-strong", modifiers = ["bold"] }
+"markup.italic"        = { fg = "syn-blue" }
+"markup.link.text"     = { fg = "syn-blue" }
+"markup.link.url"      = { fg = "syn-blue", modifiers = ["underlined"] }
+"markup.list_marker"   = { fg = "syn-rose" }
+"punctuation.list_marker" = { fg = "syn-rose" }
+"punctuation.markup"      = { fg = "syn-rose" }
+"variable.special"        = { fg = "syn-rose", modifiers = ["bold"] }
+
+"tag"             = { fg = "syn-blue" }
+"selector"        = { fg = "syn-gold" }
+"selector.pseudo" = { fg = "syn-blue" }
+
+# Version Control / Git Diff Gutter
+"diff.plus"  = { fg = "syn-green-dim" }
+"diff.delta" = { fg = "accent" }
+"diff.minus" = { fg = "syn-red" }
+
+# Predictive Ghost Text
+"predictive" = { fg = "syn-predictive" }
+
+# ==============================================================================
+# USER INTERFACE (UI) SCOPES
+# ==============================================================================
+
+# Core Text Windows & Panes
+"ui.text"               = { fg = "text-primary" }
+"ui.text.focus"         = { fg = "text-primary", bg = "base-05" }
+"ui.text.inactive"      = { fg = "text-muted" }
+"ui.background"         = { bg = "base-00" }
+
+# Virtual/Invisible Structural Layouts
+"ui.virtual"              = { fg = "invisible-chars" }
+"ui.virtual.whitespace"   = { fg = "invisible-chars" }
+"ui.virtual.indent-guide" = { fg = "indent-guide" }
+"ui.virtual.inlay-hint"   = { fg = "hint", bg = "hint-bg" }
+
+# Gutters and Sidebar Indicators
+"ui.gutter"          = { bg = "base-00" }
+"ui.linenr"          = { fg = "text-invisible" }
+"ui.linenr.selected" = { fg = "text-muted" }
+
+# Active Window Statusline Elements
+"ui.statusline"          = { fg = "text-primary", bg = "base-00" }
+"ui.statusline.inactive" = { fg = "text-muted", bg = "base-00" }
+"ui.statusline.normal"   = { fg = "base-00", bg = "accent", modifiers = ["bold"] }
+"ui.statusline.insert"   = { fg = "base-00", bg = "syn-teal", modifiers = ["bold"] }
+"ui.statusline.select"   = { fg = "base-00", bg = "syn-blue", modifiers = ["bold"] }
+
+# Cursors & Persistent Highlights
+"ui.cursor"                = { fg = "base-00", bg = "accent" }
+"ui.cursor.insert"         = { fg = "base-00", bg = "text-primary" }
+"ui.cursorline.primary"    = { bg = "active-line-bg" }
+
+# Selection Architectures
+"ui.selection"         = { bg = "selection-bg" }
+"ui.selection.primary" = { bg = "selection-primary-bg" }
+
+# Navigation Modals, Splits, Popovers, and Surfaces
+"ui.window"         = { fg = "base-04", bg = "base-01" }
+"ui.popup"          = { fg = "text-primary", bg = "base-02" }
+"ui.menu"           = { fg = "text-primary", bg = "base-03" }
+"ui.help"           = { fg = "text-primary", bg = "base-03" }
+"ui.menu.selected"  = { fg = "text-primary", bg = "base-05" }
+
+# ==============================================================================
+# DIAGNOSTICS & STATUS
+# ==============================================================================
+
+# Inline Diagnostics (Gutter & Text Overlays)
+"diagnostic.hint"    = { fg = "hint", bg = "hint-bg", underline = { color = "hint", style = "curl" } }
+"diagnostic.info"    = { fg = "info", bg = "info-bg", underline = { color = "info", style = "curl" } }
+"diagnostic.warning" = { fg = "warning", bg = "warning-bg", underline = { color = "warning", style = "curl" } }
+"diagnostic.error"   = { fg = "error", bg = "error-bg", underline = { color = "error", style = "curl" } }
+
+# Statusline/Panel Diagnostics
+"warning" = { fg = "warning", bg = "warning-bg" }
+"error"   = { fg = "error", bg = "error-bg" }
+"info"    = { fg = "info", bg = "info-bg" }
+"hint"    = { fg = "hint", bg = "hint-bg" }
+
+# ==============================================================================
+# PALETTE DEFINITIONS
+# ==============================================================================
+[palette]
+# Achromatic Surfaces
+base-00 = "#141414"
+base-01 = "#181818"
+base-02 = "#1c1c1c"
+base-03 = "#232323"
+base-04 = "#282828"
+base-05 = "#2c2c2c"
+base-06 = "#363636"
+base-07 = "#404040"
+
+# Text Contrast Map
+text-primary   = "#f2f2f2"
+text-icon      = "#c0c0c0"
+text-muted     = "#8a8a8a"
+text-subtle    = "#6a6a6a"
+text-faint     = "#555555"
+text-disabled  = "#4a4a4a"
+text-invisible = "#444444"
+
+# Monocentric Accent Subsystem
+accent       = "#d97c2b"
+accent-hover = "#e8891a"
+
+# Syntax Engine (Warm Ramp)
+syn-red      = "#f08090"
+syn-preproc  = "#e8623a"
+syn-orange   = "#ff9668"
+syn-yellow   = "#e8cc8c"
+syn-gold     = "#dfc184"
+
+# Syntax Engine (Cool Pair)
+syn-teal      = "#64d1a9"
+syn-green     = "#63d68a"
+syn-green-dim = "#48b06f"
+syn-mint      = "#80edc5"
+
+# Syntax Engine (Neutral Body Tokens)
+syn-gray-hi  = "#cbcccd"
+syn-gray-mid = "#9a9a9a"
+syn-gray-lo  = "#7a7a7a"
+
+# Contextual Overlays (Markup & Extra)
+syn-blue     = "#74ade8"
+syn-strong   = "#bf956a"
+syn-rose     = "#d07277"
+syn-rose-dim = "#b1574b"
+
+# Specialized Scopes
+comment-regular = "#4e7a62"
+comment-doc     = "#72b396"
+syn-predictive  = "#5a6a87"
+
+# Diagnostics
+error           = "#f08090"
+error-bg        = "#2a1f20"
+warning         = "#c8993a"
+warning-bg      = "#44371e"
+info            = "#74ade8"
+info-bg         = "#1e2329"
+hint            = "#7a6a55"
+hint-bg         = "#1e1b16"
+
+# Layout Components
+active-line-bg       = "#212121"
+selection-bg         = "#432d1a"
+selection-primary-bg = "#543a21"
+invisible-chars      = "#333333"
+indent-guide         = "#2a2a2a"
