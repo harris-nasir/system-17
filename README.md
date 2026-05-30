@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/harris-nasir/system-17/raw/main/assets/banner.png" alt="system-17" width="600" />
+  <img src="https://github.com/harris-nasir/system-17/raw/main/assets/banner.png" alt="system-17" />
 </p>
 
 <p align="center">
