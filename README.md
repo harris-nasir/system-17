@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/harris-nasir/system-17/blob/main/system-17-spec.md">Spec</a> ·
+  <a href="https://github.com/harris-nasir/system-17/blob/main/system-17.md">Spec</a> ·
   <a href="#implementation">Implementation</a> ·
   <a href="#palette">Palette</a> ·
   <a href="#porting">Porting</a>
