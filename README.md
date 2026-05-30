@@ -68,7 +68,7 @@ system-17 is built on three rules:
 ```bash
 # Copy the theme file into Zed's theme directory
 mkdir -p ~/.config/zed/themes
-cp system-17.json ~/.config/zed/themes/
+cp zed-editor/system-17.json ~/.config/zed/themes/
 ```
 
 Open Zed → `Cmd/Ctrl + K`, `Cmd/Ctrl + T` → select **system-17**.
@@ -76,8 +76,6 @@ Open Zed → `Cmd/Ctrl + K`, `Cmd/Ctrl + T` → select **system-17**.
 ### Other editors
 
 system-17 is spec-first — the [theme spec](system-17.md) contains everything needed to port it to any editor: surface mappings, syntax token tables, ANSI palette, diagnostic colors, pre-blended solids, and porting guidelines.
-
-Contributions for VS Code, Neovim, Alacritty, or other editors are welcome.
 
 ## Porting
 
@@ -89,18 +87,6 @@ When bringing system-17 to a new app:
 4. **Don't invent new accents** — if you need a secondary, use `syn-teal` (`#64d1a9`)
 
 Full porting guidelines with pre-blended solids and alpha compositing values → **[system-17.md](system-17.md#porting-guidelines)**
-
-## Repository
-
-```
-system-17/
-├── README.md           ← you are here
-├── system-17.md        ← full theme spec
-├── assets/
-│   ├── banner.png      ← repo banner
-│   └── preview-zed.png ← editor screenshot
-└── LICENSE
-```
 
 ## License
 
